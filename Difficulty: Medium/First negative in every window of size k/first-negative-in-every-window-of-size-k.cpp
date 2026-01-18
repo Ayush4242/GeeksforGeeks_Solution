@@ -2,10 +2,9 @@ class Solution {
   public:
     vector<int> firstNegInt(vector<int>& arr, int k) {
         deque<int>q;
-        int i=0,j=0;
+        int j=0,i=0;
         vector<int>res;
-        int n=arr.size();
-        while(j<n){
+        while(j<arr.size()){
             if(arr[j]<0){
                 q.push_back(arr[j]);
             }
@@ -16,13 +15,13 @@ class Solution {
                 else{
                     res.push_back(0);
                 }
-                if(arr[i]<0 && !q.empty()){
-                q.pop_front();
+                if(arr[i]<0 && q.size()>0){
+                    q.pop_front();
                 }
                 i++;
             }
-            
             j++;
+            
         }
         return res;
         
