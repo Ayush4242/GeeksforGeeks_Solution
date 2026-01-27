@@ -1,6 +1,7 @@
 class Solution {
   public:
     int minValue(string &s, int k) {
+        // code here
         unordered_map<char,int>mp;
         for(auto i:s){
             mp[i]++;
@@ -15,14 +16,14 @@ class Solution {
             k--;
             pq.pop();
             pq.push(t);
+            
         }
         int sum=0;
         while(!pq.empty()){
             int t=pq.top();
-            sum+=t*t;
+            sum+=(t*t);
             pq.pop();
         }
         return sum;
-        
     }
 };
