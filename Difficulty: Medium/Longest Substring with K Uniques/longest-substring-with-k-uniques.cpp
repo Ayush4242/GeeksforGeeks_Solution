@@ -1,10 +1,10 @@
 class Solution {
   public:
     int longestKSubstr(string &s, int k) {
-        int i=0,j=0,maxi=-1;
         unordered_map<char,int>mp;
-        int n=s.length();
-        while(j<n){
+        int maxi=-1;
+        int j=0,i=0;
+        while(j<s.length()){
             mp[s[j]]++;
             while(mp.size()>k){
                 mp[s[i]]--;
