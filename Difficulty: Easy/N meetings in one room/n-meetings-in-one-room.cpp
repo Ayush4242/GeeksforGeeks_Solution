@@ -7,17 +7,16 @@ class Solution {
         for(int i=0;i<start.size();i++){
             ans.push_back({start[i],end[i]});
         }
-        sort(ans.begin(),ans.end(),[](pair<int,int> &a,pair<int,int> &b){
-                return a.second<b.second;
-            
+        sort(ans.begin(),ans.end(),[](pair<int,int>&a,pair<int,int>&b){
+            return a.second<b.second;
         });
-        int time=ans[0].second,c=1;
+        int c=1;
+        int st=ans[0].second;
         for(int i=1;i<ans.size();i++){
-            if(ans[i].first>time){
+            if(ans[i].first>st){
                 c++;
-                time=ans[i].second;
+                st=ans[i].second;
             }
-            
         }
         return c;
         
