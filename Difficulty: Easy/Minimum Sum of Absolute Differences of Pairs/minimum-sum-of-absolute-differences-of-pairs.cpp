@@ -3,14 +3,11 @@
 class Solution {
   public:
     long long findMinSum(vector<int> &A, vector<int> &B, int N) {
-        sort(A.begin(),A.end(),greater<>());
-        sort(B.begin(),B.end(),greater<>());
-        int i=0,j=0;
+        sort(A.begin(),A.end());
+        sort(B.begin(),B.end());
         long long s=0;
-        while(i<A.size() && j<B.size()){
-            s+=abs(A[i]-B[j]);
-            i++;
-            j++;
+        for(int i=0;i<A.size();i++){
+            s+=abs(A[i]-B[i]);
         }
         return s;
     }
