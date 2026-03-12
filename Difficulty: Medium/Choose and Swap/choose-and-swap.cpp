@@ -1,7 +1,7 @@
 class Solution {
   public:
     string chooseandswap(string str) {
-        set<int>st;
+        set<char>st;
         for(auto i:str){
             st.insert(i);
         }
@@ -12,18 +12,19 @@ class Solution {
             }
             char ch=*st.begin();
             if(ch<str[i]){
-                char ch2=str[i];
+                char ch1=str[i];
                 for(int j=0;j<str.length();j++){
-                    if(str[j]==ch2){
-                        str[j]=ch;
+                    if(str[j]==ch){
+                        str[j]=ch1;
                     }
-                    else if(str[j]==ch){
-                        str[j]=ch2;
+                    else if(str[j]==ch1){
+                        str[j]=ch;
                     }
                 }
                 break;
             }
         }
         return str;
+        
     }
 };
