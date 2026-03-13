@@ -1,24 +1,32 @@
 class Solution {
   public:
     long long maxSum(vector<int>& arr) {
-        sort(arr.begin(),arr.end());
-        int n=arr.size();
-        int l=0,r=n-1;
         vector<int>ans;
-        while(l<r){
-            ans.push_back(arr[l]);
-            l++;
-            ans.push_back(arr[r]);
-            r--;
+        sort(arr.begin(),arr.end());
+        int i=0,j=arr.size()-1;
+        if(arr.size()%2==0){
+        while(i<=j){
+            ans.push_back(arr[i]);
+            ans.push_back(arr[j]);
+            i++;
+            j--;
+            }
         }
-        if(l==r){
-            ans.push_back(arr[l]);
+        else{
+            while(i<j){
+            ans.push_back(arr[i]);
+            ans.push_back(arr[j]);
+            i++;
+            j--;
+            }
+            ans.push_back(arr[i]);
         }
-        long long s=0;
-        for(int i=0;i<ans.size();i++){
-            s=s+abs(ans[i]-ans[(i+1)%n]);
+        int sum=0;
+        for(int i=1;i<arr.size();i++){
+            sum+=abs(ans[i]-ans[i-1]);
         }
-        return s;
+        sum+=abs(ans[0]-ans[arr.size()-1]);
+        return sum;
         
     }
 };
