@@ -1,14 +1,13 @@
 class Solution {
   public:
     int maxValue(vector<int> &arr) {
+        int mod = 1e9 + 7;
         sort(arr.begin(),arr.end());
-        const int MOD = 1e9 + 7;
-        long long s = 0;
-        // int maxi=INT_MIN;
+        int mult=1,s=0;
         for(int i=0;i<arr.size();i++){
-            s=(s+(long long)arr[i]*i)%MOD;
-            // maxi=max(maxi,s);
+            s=(s+(long long)arr[i]*i)%mod;
         }
-        return s;
+        
+        return s ;
     }
 };
