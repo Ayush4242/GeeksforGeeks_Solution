@@ -1,34 +1,36 @@
 class Solution {
   public:
     string rearrangeString(string s) {
+        priority_queue<pair<int,char>>pq;
         unordered_map<char,int>mp;
         for(auto i:s){
             mp[i]++;
         }
-        priority_queue<pair<int,char>>pq;
         for(auto i:mp){
             pq.push({i.second,i.first});
         }
         string str="";
         while(pq.size()>1){
-            pair<int,char>one=pq.top();
+            auto o=pq.top();
             pq.pop();
-            pair<int,char>two=pq.top();
+            auto t=pq.top();
             pq.pop();
-            str+=one.second;
-            one.first--;
-            str+=two.second;
-            two.first--;
-            if(one.first>0){
-                pq.push({one.first,one.second});
+            str+=o.second;
+            str+=t.second;
+            o.first--;
+            t.first--;
+            if(o.first>0){
+                pq.push(o);
             }
-            if(two.first>0){
-                pq.push({two.first,two.second});
+            if(t.first>0){
+                pq.push(t);
             }
-            if(pq.size()==1 && pq.top().first>1){
+        }
+        if(pq.size()==1){
+            if(pq.top().first>1){
                 return "";
             }
-            if(pq.size()==1 && pq.top().first==1){
+            else{
                 str+=pq.top().second;
             }
         }
@@ -36,43 +38,3 @@ class Solution {
         
     }
 };
-// class Solution {
-//   public:
-//     string rearrangeString(string s) {
-//         unordered_map<char,int>mp;
-//         for(auto i:s){
-//             mp[i]++;
-//         }
-//         priority_queue<pair<int,char>>pq;
-//         for(auto i:mp){
-//             pq.push({i.second,i.first});
-//         }
-//         string str="";
-//         while(pq.size()>1){
-//             pair<int,char>one=pq.top();
-//             pq.pop();
-//             pair<int,char>two=pq.top();
-//             pq.pop();
-//             str+=one.second;
-//             str+=two.second;
-//             one.first--;
-//             two.first--;
-//             if(one.first>0){
-//                 pq.push({one.first,one.second});
-//             }
-//             if(two.first>0){
-//                 pq.push({two.first,two.second});
-//             }
-//             if(pq.size()==1 && pq.top().first>1){
-//                 return ""; 
-//             }
-//             if(pq.size()==1 && pq.top().first==1){
-//                 str+=pq.top().second;
-//             }
-            
-//         }
-//         return str;
-        
-        
-//     }
-// };
