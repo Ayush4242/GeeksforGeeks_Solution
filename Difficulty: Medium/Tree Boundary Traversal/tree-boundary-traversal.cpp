@@ -16,46 +16,45 @@ class Node {
 
 class Solution {
   public:
-  bool isleaf(Node* node) {
-        return node->left == NULL && node->right == NULL;
+  bool isLeaf(Node* root){
+      return (root->left==nullptr && root->right==nullptr);
+  }
+    void addleft(Node *root,vector<int>&res){
+        Node* curr=root->left;
+        while(curr){
+        if(!isLeaf(curr)){
+            res.push_back(curr->data);
+        }
+        if(curr->left){
+            curr=curr->left;
+        }
+        else{
+            curr=curr->right;
+        }
+        }
     }
-  void addleft(Node* root,vector<int>&res){
-      Node* curr=root->left;
-      while(curr){
-          if(!isleaf(curr)){
-              res.push_back(curr->data);
-          }
-          if(curr->left){
-              curr=curr->left;
-          }
-          else{
-              curr=curr->right;
-          }
-      }
-  }
-  void addright(Node* root,vector<int>&res){
-      Node* curr=root->right;
-      vector<int>temp;
-      
-      while(curr){
-          if(!isleaf(curr)){
-              temp.push_back(curr->data);
-          }
-          if(curr->right){
-              curr=curr->right;
-          }
-          else{
-              curr=curr->left;
-          }
-      }
-      for(int i=temp.size()-1;i>=0;i--){
-          res.push_back(temp[i]);
-      }
-  }
+    void addright(Node* root,vector<int>&res){
+        Node* curr1=root->right;
+        vector<int>temp;
+        while(curr1){
+        if(!isLeaf(curr1)){
+            temp.push_back(curr1->data);
+        }
+        if(curr1->right){
+            curr1=curr1->right;
+        }
+        else{
+            curr1=curr1->left;
+        }
+    }
+        for(int i=temp.size()-1;i>=0;i--){
+            res.push_back(temp[i]);
+        }
+        
+    }
     void addleaf(Node* root,vector<int>&res){
-        if(isleaf(root)){
+        if(isLeaf(root)){
             res.push_back(root->data);
-            return;
         }
         if(root->left){
             addleaf(root->left,res);
@@ -63,22 +62,19 @@ class Solution {
         if(root->right){
             addleaf(root->right,res);
         }
-        
-  }
+        }
+    
     vector<int> boundaryTraversal(Node *root) {
         vector<int>res;
-        
         if(root==nullptr){
             return res;
         }
-        if(!isleaf(root)){
+        if(!isLeaf(root)){
             res.push_back(root->data);
         }
         addleft(root,res);
         addleaf(root,res);
         addright(root,res);
-        
         return res;
-        
     }
 };
