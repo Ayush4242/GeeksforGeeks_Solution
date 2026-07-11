@@ -1,28 +1,27 @@
 class Solution {
   public:
     double fractionalKnapsack(vector<int>& val, vector<int>& wt, int capacity) {
-        vector<pair<int,int>>ans;
+        vector<pair<int,int>>vec;
         for(int i=0;i<val.size();i++){
-            ans.push_back({val[i],wt[i]});
+            vec.push_back({val[i],wt[i]});
         }
-        sort(ans.begin(),ans.end(),[](pair<int,int>&a,pair<int,int>&b){
+        sort(vec.begin(),vec.end(),[](auto &a,auto &b){
             return (double)a.first/a.second>(double)b.first/b.second;
         });
-        double s=0;
-        for(int i=0;i<ans.size();i++){
-            
-            if(capacity-ans[i].second>=0){
-                capacity-=ans[i].second;
-                s+=ans[i].first;
+        double res=0.0,sum=0.0;
+        int i=0,j=0;
+        for(int i=0;i<vec.size();i++){
+            if(sum+vec[i].second<=capacity){
+            sum+=vec[i].second;
+            res+=vec[i].first;
             }
             else{
-                s+=((double)ans[i].first/ans[i].second)*capacity;
+                int rem=capacity-sum;
+                res+=((double)rem/vec[i].second)*vec[i].first;
                 break;
-                
             }
-            
         }
-        return s;
+        return res;
         
         
     }
