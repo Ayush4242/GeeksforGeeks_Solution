@@ -2,14 +2,18 @@ class Solution {
   public:
     string firstRepChar(string s) {
         unordered_map<char,int>mp;
-        for(int i=0;i<s.length();i++){
-            if(mp.find(s[i])!=mp.end()){
-                return string(1,s[i]);
+        char ch=' ';
+        for(auto i:s){
+            if(mp.find(i)!=mp.end()){
+                ch=i;
+                break;
             }
             else{
-                mp[s[i]]++;
+                mp[i]++;
             }
         }
-        return "-1";
+        string res="";
+        res+=ch;
+        return res==" "?"-1":res;
     }
 };
