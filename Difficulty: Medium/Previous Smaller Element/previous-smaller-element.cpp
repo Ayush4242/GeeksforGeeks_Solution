@@ -2,28 +2,21 @@ class Solution {
   public:
     vector<int> prevSmaller(vector<int>& arr) {
         stack<int>st;
-        vector<int>res;
-        
+        vector<int>ans(arr.size(),-1);
         for(int i=0;i<arr.size();i++){
-            if(st.empty()){
-                res.push_back(-1);
-                
-            }
-            else{
             while(!st.empty() && st.top()>=arr[i]){
-                st.pop();
+                    st.pop();
             }
-            if(!st.empty()){
-            
-            res.push_back(st.top());
+            if(st.empty()){
+                
+                st.push(arr[i]);
             }
-            else{
-                res.push_back(-1);
+            else if(st.top()<arr[i]){
+                ans[i]=st.top();
+                st.push(arr[i]);
             }
         }
-            st.push(arr[i]);
-        }
-        return res;
-        
+        return ans;
     }
+    
 };
